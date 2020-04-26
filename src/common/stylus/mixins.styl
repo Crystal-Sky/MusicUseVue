@@ -1,0 +1,49 @@
+$red = #DD001B;
+$gray = #E2E2E2;
+$black = #000000;
+$darkgray = #989898;
+
+//一像素下边距
+bottom-border-1px($color)
+  border none
+  &:after
+    content ''
+    position absolute
+    left 0
+    bottom 0
+    width 100%
+    height 1px
+    background-color $color
+    transform scaleY(0.5)
+
+//一像素上边距
+top-border-1px($color)
+  border none
+  &::before
+    content ''
+    position absolute
+    z-index 200
+    left 0
+    top 0
+    width 100%
+    height 1px
+    background-color $color
+
+//根据像素比缩放1px像素边距
+@media only screen and (-webkit-device-pixel-ratio: 2)
+  .border-1px
+    &::before
+      transform scaleY(.5)
+
+@media only screen and (-webkit-device-pixel-ratio: 3)
+  .border-1px
+    &::before
+      transform scaleY(.333333)
+
+//清除浮动
+clearFix()
+  *zoom 1
+  &::after
+    content ''
+    display block
+    clear both
